@@ -3,6 +3,11 @@ import numpy as np
 import csv
 import random
 import joblib
+import PySimpleGUI as sg
+import os.path
+
+
+
 from sklearn.model_selection import train_test_split
 df = pd.read_csv("datasetmotor.csv")
 # print(df.Kunci)
