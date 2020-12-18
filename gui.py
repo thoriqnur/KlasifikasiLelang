@@ -33,30 +33,34 @@ left_column = [
 # For now will only show result
 tab1 =  [
     [
-    # sg.Text("Sample Data:"),
-    sg.Text(size=(80, 20), key="-head-")
+        # sg.Text("Sample Data:"),
+        sg.Text(size=(80, 20), key="-head-")
     ],
 ]
 tab2 = [
     [
-    # sg.Text("Nilai Akurasi:"),
-    sg.Text(size=(80, 20), key="-akurasi-")
+        # sg.Text("Nilai Akurasi:"),
+        sg.Text(size=(80, 20), key="-akurasi-")
     ],
 ]
 tab3 =  [
     [
-    # sg.Text("Confusion Matrix:"),
-    sg.Text(size=(80, 20), key="-conf-")
+        # sg.Text("Confusion Matrix:"),
+        sg.Text(size=(80, 20), key="-conf-")
     ],
 ]
 tab4 = [
     [
-    # sg.Text("Laporan Klasifikasi:"),
-    sg.Text(size=(80, 20), key="-laporan-")
+        # sg.Text("Laporan Klasifikasi:"),
+        sg.Text(size=(80, 20), key="-laporan-")
     ],
 ]
 
-layoutTab = [[sg.TabGroup([[sg.Tab('Sample Data', tab1), sg.Tab('Nilai Akurasi', tab2), sg.Tab('Confusion Matrix', tab3), sg.Tab('Laporan Klasifikasi', tab4)]])]]
+layoutTab = [
+        [
+            sg.TabGroup([[sg.Tab('Sample Data', tab1), sg.Tab('Nilai Akurasi', tab2), sg.Tab('Confusion Matrix', tab3), sg.Tab('Laporan Klasifikasi', tab4)]])
+        ]
+    ]
 
 # ----- Full layout -----
 layout = [
