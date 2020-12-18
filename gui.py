@@ -21,7 +21,6 @@ from sklearn import metrics
 from sklearn.metrics import accuracy_score
 
 # First the window layout in 2 columns
-
 left_column = [
     [
         sg.Text("CSV Files"),
@@ -32,19 +31,43 @@ left_column = [
 ]
 
 # For now will only show result
-right_column = [
-    [sg.Text("Hasil Klasifikasi:")],
-    [sg.Text(size=(80, 20), key="-hasil-")],
+tab1 =  [
+    [
+    # sg.Text("Sample Data:"),
+    sg.Text(size=(80, 20), key="-head-")
+    ],
 ]
+tab2 = [
+    [
+    # sg.Text("Nilai Akurasi:"),
+    sg.Text(size=(80, 20), key="-akurasi-")
+    ],
+]
+tab3 =  [
+    [
+    # sg.Text("Confusion Matrix:"),
+    sg.Text(size=(80, 20), key="-conf-")
+    ],
+]
+tab4 = [
+    [
+    # sg.Text("Laporan Klasifikasi:"),
+    sg.Text(size=(80, 20), key="-laporan-")
+    ],
+]
+
+layoutTab = [[sg.TabGroup([[sg.Tab('Sample Data', tab1), sg.Tab('Nilai Akurasi', tab2), sg.Tab('Confusion Matrix', tab3), sg.Tab('Laporan Klasifikasi', tab4)]])]]
 
 # ----- Full layout -----
 layout = [
     [
         sg.Column(left_column),
         sg.VSeperator(),
-        sg.Column(right_column),
+        sg.Column(layoutTab),
     ]
 ]
+
+
 
 window = sg.Window("Hitung Hasil Klasifikasi", layout)
 
@@ -69,15 +92,14 @@ while True:
             conf_matriks = confusion_matrix(y_test,y_pred)
             laporan = classification_report(y_test,y_pred)
 
-            # print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-            # print(confusion_matrix(y_test,y_pred))
-            # print(classification_report(y_test,y_pred))
 
         except:
             file_list = []
 
-        # window["-hasil-"].update(df.head())
-        window["-hasil-"].update(laporan)
+        window["-head-"].update(df.head())
+        window["-akurasi-"].update(akurasi)
+        window["-conf-"].update(conf_matriks)
+        window["-laporan-"].update(laporan)
 
 
 window.close()
