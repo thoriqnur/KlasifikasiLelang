@@ -18,6 +18,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
+sg.theme('DarkAmber') 
 
 # First the window layout in 2 columns
 left_column = [
@@ -54,10 +55,17 @@ tab4 = [
         sg.Text(size=(80, 20), key="-laporan-")
     ],
 ]
+tab5 = [
+    [
+        sg.Text("Prediksi"),
+        sg.Input(size=(20, 1), enable_events=True, key="-prediksi-"),
+        sg.OK()
+    ],
+]
 
 layoutTab = [
         [
-            sg.TabGroup([[sg.Tab('Sample Data', tab1), sg.Tab('Nilai Akurasi', tab2), sg.Tab('Confusion Matrix', tab3), sg.Tab('Laporan Klasifikasi', tab4)]])
+            sg.TabGroup([[sg.Tab('Sample Data', tab1), sg.Tab('Nilai Akurasi', tab2), sg.Tab('Confusion Matrix', tab3), sg.Tab('Laporan Klasifikasi', tab4), sg.Tab('Prediksi', tab5)]])
         ]
     ]
 
@@ -104,5 +112,20 @@ while True:
         window["-conf-"].update(conf_matriks)
         window["-laporan-"].update(laporan)
 
+    if event == "-prediksi-":
+        motor_index = values["-prediksi-"]
+        try:
+            df = pd.read_csv(csv)
+            X = df.iloc[:, :-1].values
+            y = df.iloc[:, 6].values
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50)
+            gnb = GaussianNB()
+
+            motor_dic = {0:'Kategori A', 1:'Kategori B'}
+            y_test_np = np.array(y_test)
+            
+            print(f'Actual --> {motor_dic[y_test_np[motor_index]]}  --  Prediction --> {motor_dic[pred[motor_index]]}')
+        except:
+            motor_index = []
 
 window.close()
