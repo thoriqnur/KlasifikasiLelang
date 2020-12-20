@@ -18,7 +18,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
-sg.theme('NeutralBlue') 
+sg.theme('NeutralBlue')
 
 # First the window layout in 2 columns
 left_column = [
@@ -34,7 +34,7 @@ left_column = [
 tab1 =  [
     [
         # sg.Text("Sample Data:"),
-        sg.Text(size=(80, 20), key="-head-")
+        sg.Output(size=(80, 20), key="-head-")
     ],
 ]
 tab2 = [
@@ -56,7 +56,7 @@ tab4 = [
     ],
 ]
 tab5 = [
-    [sg.Text('Prediksi')],      
+    [sg.Text('Prediksi')],
     [sg.Input(key='-prediksi-')],
     [sg.OK('Prediksi'), sg.Exit('Keluar')]
 ]
@@ -101,11 +101,13 @@ while True:
             conf_matriks = confusion_matrix(y_test,y_pred)
             laporan = classification_report(y_test,y_pred)
 
+            pd.set_option('display.max_rows', 100)
+
 
         except:
             file_list = []
 
-        window["-head-"].update(df.head())
+        window["-head-"].update(df)
         window["-akurasi-"].update(akurasi)
         window["-conf-"].update(conf_matriks)
         window["-laporan-"].update(laporan)
@@ -129,11 +131,11 @@ while True:
             else:
                 return 'Kategori A'
         y_test_np=np.array(y_test)
-        y_pred_np=np.array(y_pred)    
-        print("==Hasil Data Tes==")    
-        print(y_test_np)    
-        print("==Hasil Data Pred==")    
-        print(y_pred_np)    
+        y_pred_np=np.array(y_pred)
+        print("==Hasil Data Tes==")
+        print(y_test_np)
+        print("==Hasil Data Pred==")
+        print(y_pred_np)
         if motor_index != '':
             h = np.where(y_test_np == motor_index)
             ha = np.where(y_pred_np == motor_index)
@@ -151,7 +153,7 @@ while True:
 
         #     motor_dic = {0:'Kategori A', 1:'Kategori B'}
         #     y_test_np = np.array(y_test)
-            
+
         #     print(f'Actual --> {motor_dic[y_test_np[motor_index]]}  --  Prediction --> {motor_dic[pred[motor_index]]}')
         # except:
         #     motor_index = []
