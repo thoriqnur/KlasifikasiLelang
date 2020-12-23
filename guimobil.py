@@ -18,7 +18,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
-sg.theme('NeutralBlue')
+sg.theme('LightPurple')
 
 # First the window layout in 2 columns
 left_column = [
@@ -78,7 +78,7 @@ layout = [
 
 
 
-window = sg.Window("Hitung Hasil Klasifikasi", layout)
+window = sg.Window("Hitung Hasil Klasifikasi Mobil", layout)
 
 # Run the Event Loop
 while True:
@@ -116,71 +116,8 @@ while True:
         motor_index = values["-prediksi-"]
         import pandas as pd 
   
-        # making data frame from csv file 
-        prediction = pd.DataFrame(y_pred, columns=['predictions']).to_csv('predictionmob.csv')
-        df = pd.read_csv("dataset2.csv")
+        df = pd.read_csv("dataset3.csv")
         data = df.loc[df['TNKB'] == motor_index]
-        # sorting dataframe 
-        # data.sort_values("TNKB", inplace = True) 
-        
-        # making boolean series for a team name 
-        # filter = data["TNKB"]==motor_index
-        
-        # filtering data 
-        # data.where(filter, inplace=True)
-        # df = data[['Outcome']] 
-        # if (df == 'A'):
-        #     print("Kategori A")
-        # elif (df == 'B'):
-        #     print("Kategori B")
-        # elif (df == "ka")
-        # display
         sg.PopupScrolled('Hasil Prediksi : ', data[['Prediction']], 'Hasil Awal : ', data[['Outcome']]) 
-        # data 
-        # print(motor_index)
-        # df = pd.read_csv(csv)
-        # X = df.iloc[:, :-1].values
-        # y = df.iloc[:, 6].values
-        # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50)
-        # gnb = GaussianNB()
-
-        # def label_to_str(x):
-        #     if x == 0:
-        #         return 'Kategori D'
-        #     elif x == 1:
-        #         return 'Kategori C'
-        #     elif x == 2:
-        #         return 'Kategori B'
-        #     # else:
-        #     #     return 'Kategori A'
-        # y_test_np=np.array(y_test)
-        # y_pred_np=np.array(y_pred)
-        # print("==Hasil Data Tes==")
-        # print(y_test_np)
-        # print("==Hasil Data Pred==")
-        # print(y_pred_np)
-        # print(motor_index)
-        # if motor_index != '':
-        #     h = np.where(y_test_np == motor_index)
-        #     ha = np.where(y_pred_np == motor_index)
-        #     hasilawal = label_to_str(h[0])
-        #     hasil = label_to_str(ha[0])
-        #     # print(hasilawal)
-        #     sg.Popup('Hasil Awal : ', y_test, 'Hasil Akhir :', y_pred)
-        # else:
-        #     print('Batal')
-        # try:
-        #     df = pd.read_csv(csv)
-        #     X = df.iloc[:, :-1].values
-        #     y = df.iloc[:, 6].values
-        #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50)
-        #     gnb = GaussianNB()
-
-        #     motor_dic = {0:'Kategori A', 1:'Kategori B'}
-        #     y_test_np = np.array(y_test)
-
-        #     print(f'Actual --> {motor_dic[y_test_np[motor_index]]}  --  Prediction --> {motor_dic[pred[motor_index]]}')
-        # except:
-        #     motor_index = []
 
 window.close()
